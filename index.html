@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- ... (head content remains the same) ... -->
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Aditya Kumar Rai | Portfolio</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <style>
+      /* ... (existing CSS remains the same) ... */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #2563eb;
+        --primary-dark: #1d4ed8;
+        --secondary: #8b5cf6;
+        --dark: #0f172a;
+        --light: #f8fafc;
+        --gray: #94a3b8;
+        --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        color: var(--light);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      section {
+        padding: 100px 0;
+        position: relative;
+      }
+
+      /* Header Styles */
+      header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        padding: 20px 0;
+        transition: var(--transition);
+      }
+
+      header.scrolled {
+        background: rgba(15, 23, 42, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 15px 0;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-family: "Montserrat", sans-serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--light);
+        text-decoration: none;
+      }
+
+      .logo span {
+        color: var(--primary);
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+      }
+
+      nav li {
+        margin-left: 30px;
+      }
+
+      nav a {
+        color: var(--light);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1rem;
+        position: relative;
+        padding: 5px 0;
+        transition: var(--transition);
+      }
+
+      nav a:hover {
+        color: var(--primary);
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary);
+        transition: var(--transition);
+      }
+
+      nav a:hover::after {
+        width: 100%;
+      }
+
+      /* FIXED: Add CSS variables for mouse position */
+      .hero {
+        --mouse-x: 50%;
+        --mouse-y: 50%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* FIXED: Update ::before to use CSS variables */
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+          rgba(37, 99, 235, 0.1) 0%,
+          rgba(15, 23, 42, 0) 70%
+        );
+        z-index: -1;
+      }
+      .hero-content {
+        max-width: 650px;
+        z-index: 2;
+      }
+
+      .hero h1 {
+        font-family: "Montserrat", sans-serif;
+        font-size: 4.5rem;
+        line-height: 1.1;
+        margin-bottom: 20px;
+        color: white;
+      }
+
+      .hero h1 span {
+        color: var(--primary);
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 40px;
+        color: var(--gray);
+        max-width: 600px;
+      }
+
+      .btn {
+        display: inline-block;
+        background: var(--primary);
+        color: white;
+        padding: 15px 35px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: var(--transition);
+        border: 2px solid var(--primary);
+        font-size: 1rem;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        background: transparent;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+      }
+
+      .btn-outline {
+        background: transparent;
+        margin-left: 15px;
+      }
+
+      .btn-outline:hover {
+        background: var(--primary);
+      }
+
+      /* Skills Section */
+      .section-title {
+        text-align: center;
+        margin-bottom: 70px;
+        position: relative;
+      }
+
+      .section-title h2 {
+        font-family: "Montserrat", sans-serif;
+        font-size: 2.8rem;
+        display: inline-block;
+        position: relative;
+      }
+
+      .section-title h2::after {
+        content: "";
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: var(--primary);
+        border-radius: 2px;
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 30px;
+      }
+
+      .skill-card {
+        background: rgba(30, 41, 59, 0.5);
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        transition: var(--transition);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .skill-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        border-color: rgba(37, 99, 235, 0.3);
+      }
+
+      .skill-icon {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        color: var(--primary);
+      }
+
+      .skill-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+      }
+
+      /* Projects Section */
+      .projects {
+        background: rgba(15, 23, 42, 0.7);
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 40px;
+      }
+
+      .project-card {
+        background: rgba(30, 41, 59, 0.5);
+        border-radius: 15px;
+        overflow: hidden;
+        transition: var(--transition);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .project-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .project-img {
+        height: 200px;
+        background: linear-gradient(45deg, #2563eb, #8b5cf6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        color: white;
+      }
+
+      .project-content {
+        padding: 25px;
+      }
+
+      .project-content h3 {
+        font-size: 1.6rem;
+        margin-bottom: 10px;
+      }
+
+      .project-content p {
+        color: var(--gray);
+        margin-bottom: 20px;
+      }
+
+      .tech-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .tech {
+        background: rgba(37, 99, 235, 0.2);
+        color: var(--primary);
+        padding: 5px 15px;
+        border-radius: 50px;
+        font-size: 0.9rem;
+      }
+
+      /* Contact Section */
+      .contact {
+        text-align: center;
+      }
+
+      .contact-content {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .contact p {
+        font-size: 1.2rem;
+        margin-bottom: 40px;
+        color: var(--gray);
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        margin-top: 30px;
+      }
+
+      .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: rgba(30, 41, 59, 0.5);
+        color: var(--primary);
+        font-size: 1.8rem;
+        transition: var(--transition);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .social-links a:hover {
+        background: var(--primary);
+        color: white;
+        transform: translateY(-5px);
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 30px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        color: var(--gray);
+        font-size: 0.9rem;
+      }
+
+      /* Animation classes */
+      /* .hidden {
+        opacity: 0;
+        transform: translateY(30px);
+      } */
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 3rem;
+        }
+
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+
+        nav ul {
+          display: none;
+        }
+
+        .hero-content {
+          text-align: center;
+        }
+
+        .hero-btns {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .btn-outline {
+          margin-left: 0;
+        }
+      }
+
+      /* Experience Section */
+      .experience {
+        background: rgba(15, 23, 42, 0.7);
+      }
+
+      .experience-container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .timeline {
+        position: relative;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: var(--primary);
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .timeline-item {
+        display: flex;
+        margin-bottom: 50px;
+        position: relative;
+      }
+
+      .timeline-content {
+        background: rgba(30, 41, 59, 0.5);
+        border-radius: 15px;
+        padding: 30px;
+        width: 45%;
+        transition: var(--transition);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .timeline-content:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        border-color: rgba(37, 99, 235, 0.3);
+      }
+
+      .timeline-item:nth-child(even) {
+        justify-content: flex-end;
+      }
+      @media (max-width: 768px) {
+        .timeline-item {
+          justify-content: flex-end;
+        }
+
+        .timeline-content {
+          width: 90%;
+        }
+
+        .timeline::before {
+          left: 2%;
+        }
+        .timeline-icon {
+          left: 2% !important;
+        }
+      }
+      .timeline-icon {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 50px;
+        background: var(--primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+        z-index: 10;
+      }
+
+      .timeline-date {
+        color: var(--primary);
+        font-weight: 600;
+        margin-bottom: 10px;
+        display: block;
+      }
+
+      .timeline-content h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+
+      .timeline-content h4 {
+        color: var(--gray);
+        font-weight: 500;
+        margin-bottom: 15px;
+      }
+
+      .timeline-content ul {
+        padding-left: 20px;
+        margin-top: 15px;
+      }
+
+      .timeline-content li {
+        margin-bottom: 8px;
+        position: relative;
+      }
+
+      .timeline-content li::before {
+        content: "▹";
+        color: var(--primary);
+        position: absolute;
+        left: -20px;
+      }
+
+      /* //new */
+      .hidden {
+        opacity: 0;
+        transform: translateY(40px);
+        animation: slideInUp 1s ease forwards;
+      }
+
+      .hero-content h1.hidden {
+        animation-delay: 0.2s;
+      }
+
+      .hero-content p.hidden {
+        animation-delay: 0.4s;
+      }
+
+      .hero-btns .btn.hidden {
+        animation-delay: 0.6s;
+      }
+      .show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @keyframes slideInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ... (HTML content remains the same) ... -->
+    <!-- Header -->
+    <header>
+      <div class="container header-content">
+        <a
+          href="#"
+          class="logo"
+          >Aditya<span>.</span></a
+        >
+        <nav>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section
+      class="hero"
+      id="home"
+    >
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="hidden">
+            Hi, I'm <span>Aditya Kumar Rai</span><br />Full Stack Developer
+          </h1>
+          <p class="hidden">
+            I build exceptional digital experiences using React, Node.js, and
+            modern web technologies. Passionate about creating efficient,
+            scalable applications with great user experiences.
+          </p>
+          <div class="hero-btns">
+            <a
+              href="#experience"
+              class="btn hidden"
+              >My Experience</a
+            >
+
+            <a
+              href="#contact"
+              class="btn btn-outline hidden"
+              >Contact Me</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section
+      class="skills"
+      id="skills"
+    >
+      <div class="container">
+        <div class="section-title">
+          <h2>Technical Skills</h2>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-card hidden">
+            <div class="skill-icon">
+              <i class="fab fa-react"></i>
+            </div>
+            <h3>React</h3>
+            <p>
+              Building dynamic and responsive user interfaces with React
+              ecosystem.
+            </p>
+          </div>
+
+          <div class="skill-card hidden">
+            <div class="skill-icon">
+              <i class="fas fa-code-branch"></i>
+            </div>
+            <h3>Redux</h3>
+            <p>
+              State management for complex applications with Redux and Redux
+              Toolkit.
+            </p>
+          </div>
+
+          <div class="skill-card hidden">
+            <div class="skill-icon">
+              <i class="fab fa-node-js"></i>
+            </div>
+            <h3>Node.js</h3>
+            <p>
+              Server-side development with Node.js for scalable backend
+              solutions.
+            </p>
+          </div>
+
+          <div class="skill-card hidden">
+            <div class="skill-icon">
+              <i class="fas fa-server"></i>
+            </div>
+            <h3>Express</h3>
+            <p>
+              Building RESTful APIs and web applications with Express framework.
+            </p>
+          </div>
+
+          <div class="skill-card hidden">
+            <div class="skill-icon">
+              <i class="fas fa-database"></i>
+            </div>
+            <h3>MySQL</h3>
+            <p>Database design, querying, and management with MySQL.</p>
+          </div>
+
+          <div class="skill-card hidden">
+            <div class="skill-icon">
+              <i class="fab fa-git"></i>
+            </div>
+            <h3>Git</h3>
+            <p>Version control and collaborative development with Git.</p>
+          </div>
+
+          <div class="skill-card hidden">
+            <div class="skill-icon">
+              <i class="fab fa-gitlab"></i>
+            </div>
+            <h3>GitLab</h3>
+            <p>CI/CD pipelines and project management with GitLab.</p>
+          </div>
+
+          <div class="skill-card hidden">
+            <div class="skill-icon">
+              <i class="fab fa-js"></i>
+            </div>
+            <h3>Next.js</h3>
+            <p>
+              Building server-rendered React applications with Next.js
+              framework.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Experience Section -->
+    <section
+      class="experience"
+      id="experience"
+    >
+      <div class="container">
+        <div class="section-title">
+          <h2>Professional Experience</h2>
+        </div>
+        <div class="experience-container">
+          <div class="timeline">
+            <!-- Experience 1 -->
+            <div class="timeline-item hidden">
+              <div class="timeline-icon">
+                <i class="fas fa-briefcase"></i>
+              </div>
+              <div class="timeline-content">
+                <span class="timeline-date">May 2023 – Present</span>
+                <h3>Full Stack Developer (Frontend-Focused)</h3>
+                <h4>CodeFire Technologies, Noida</h4>
+                <ul>
+                  <li>
+                    Developed scalable web apps using <strong>React.js</strong>,
+                    <strong>Next.js</strong>, <strong>Node.js</strong>, and
+                    <strong>MySQL</strong> for platforms like Finhaat and DMS.
+                  </li>
+                  <li>
+                    Built reusable, responsive UI components from
+                    <strong>Figma</strong> designs using
+                    <strong>Material UI</strong> and <strong>Bootstrap</strong>.
+                  </li>
+                  <li>
+                    Integrated <strong>RESTful APIs</strong> and handled secure
+                    document workflows with <strong>AWS S3</strong> and RBAC.
+                  </li>
+                  <li>
+                    Implemented performance enhancements with
+                    <strong>code-splitting</strong>,
+                    <strong>lazy loading</strong>, and
+                    <strong>PWA</strong> strategies.
+                  </li>
+                  <li>
+                    Deployed projects using <strong>PM2</strong> and
+                    collaborated in Agile sprints with backend and design teams.
+                  </li>
+                  <li>
+                    Mentored interns and contributed to internal documentation
+                    and code reviews.
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Experience 2 -->
+            <div class="timeline-item hidden">
+              <div class="timeline-icon">
+                <i class="fas fa-user-graduate"></i>
+              </div>
+              <div class="timeline-content">
+                <span class="timeline-date">June 2022 – March 2023</span>
+                <h3>Full Stack Developer Intern</h3>
+                <h4>JSpiders, BTM Layout, Bangalore</h4>
+                <ul>
+                  <li>
+                    Assisted in building full stack applications using
+                    <strong>React.js</strong>, <strong>Node.js</strong>, and
+                    <strong>Express.js</strong> during hands-on training and
+                    simulations.
+                  </li>
+                  <li>
+                    Practiced integrating <strong>RESTful APIs</strong> and
+                    performing data operations with <strong>MySQL</strong> under
+                    mentor supervision.
+                  </li>
+                  <li>
+                    Implemented basic routing and reusable components using
+                    <strong>React Router</strong> in guided project setups.
+                  </li>
+                  <li>
+                    Followed <strong>Agile</strong> methodologies while
+                    collaborating in peer projects and group tasks.
+                  </li>
+                  <li>
+                    Focused on improving code readability and database query
+                    efficiency through instructor-led feedback.
+                  </li>
+                  <li>
+                    Prepared documentation and notes for internal use and
+                    concept reinforcement during training modules.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Projects Section -->
+    <section
+      class="projects"
+      id="projects"
+    >
+      <div class="container">
+        <div class="section-title">
+          <h2>Company Projects</h2>
+        </div>
+        <div class="projects-grid">
+          <!-- Finhaat -->
+          <div class="project-card hidden">
+            <div class="project-img">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <div class="project-content">
+              <h3>Insurance CRM Portal</h3>
+              <p>
+                <strong>Full Stack Developer</strong> –
+                <!-- <a
+                  href="https://admin.finhaat.com"
+                  target="_blank"
+                  >admin.finhaat.com</a
+                >
+                | Noida<br />
+                <em>Mar 2023 – Present</em> -->
+              </p>
+              <ul>
+                <li>
+                  Developed responsive UI and reusable components using
+                  <strong>React.js</strong> and <strong>Material UI</strong>.
+                </li>
+                <li>
+                  Integrated frontend with backend APIs to manage user flows and
+                  insurance claim functionalities.
+                </li>
+                <li>
+                  Handled state management using <strong>Redux</strong> and
+                  <strong>Context API</strong>.
+                </li>
+                <li>
+                  Collaborated on REST API design and backend logic using
+                  <strong>Node.js</strong> and <strong>Express.js</strong>.
+                </li>
+                <li>
+                  Enhanced performance using lazy loading, code splitting, and
+                  memoization.
+                </li>
+              </ul>
+              <div class="tech-stack">
+                <span class="tech">React.js</span>
+                <span class="tech">Redux</span>
+                <span class="tech">Node.js</span>
+                <span class="tech">Express</span>
+                <span class="tech">MySQL</span>
+                <span class="tech">REST APIs</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Aarogyahaat -->
+          <div class="project-card hidden">
+            <div class="project-img">
+              <i class="fas fa-heartbeat"></i>
+            </div>
+            <div class="project-content">
+              <h3>PWA Healthcare App</h3>
+              <p>
+                <strong>Full Stack Developer</strong> – Available on
+                PlayStore<br />
+                <!-- <em>2023 – 2024</em> -->
+              </p>
+              <ul>
+                <li>
+                  Built a mobile-friendly healthcare wellness using
+                  <strong>React.js</strong> and <strong>Bootstrap</strong>.
+                </li>
+                <li>
+                  Integrated RESTful APIs to display live patient data and
+                  reports.
+                </li>
+                <li>
+                  Enabled offline access and faster loads with
+                  <strong>PWA</strong> features and service workers.
+                </li>
+                <li>
+                  Coordinated UI/UX implementation and backend support across
+                  teams.
+                </li>
+              </ul>
+              <div class="tech-stack">
+                <span class="tech">React.js</span>
+                <span class="tech">Redux</span>
+                <span class="tech">PWA</span>
+                <span class="tech">REST APIs</span>
+                <span class="tech">Bootstrap</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- DMS -->
+          <div class="project-card hidden">
+            <div class="project-img">
+              <i class="fas fa-folder-open"></i>
+            </div>
+            <div class="project-content">
+              <h3>Document Management System</h3>
+              <p>
+                <strong>Full Stack Developer Intern</strong> –
+                <!-- <a
+                  href="https://dms.reliablerecords.com"
+                  target="_blank"
+                  >dms.reliablerecords.com</a
+                >
+                | Remote<br />
+                <em>Jan 2022 – Jul 2022</em> -->
+              </p>
+              <ul>
+                <li>
+                  Created secure document workflows using
+                  <strong>React.js</strong> and <strong>Express.js</strong>.
+                </li>
+                <li>
+                  Designed and consumed APIs to upload, retrieve, and categorize
+                  documents securely.
+                </li>
+                <li>
+                  Implemented <strong>RBAC</strong> for 5+ user roles and
+                  connected with <strong>AWS S3</strong> for file storage.
+                </li>
+                <li>
+                  Integrated <strong>OCR</strong> for extracting text from
+                  image-based PDFs.
+                </li>
+              </ul>
+              <div class="tech-stack">
+                <span class="tech">React.js</span>
+                <span class="tech">Node.js</span>
+                <span class="tech">Express</span>
+                <span class="tech">AWS S3</span>
+                <span class="tech">MySQL</span>
+                <span class="tech">OCR</span>
+                <span class="tech">RBAC</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section
+      class="contact"
+      id="contact"
+    >
+      <div class="container">
+        <div class="section-title">
+          <h2>Get In Touch</h2>
+        </div>
+        <div class="contact-content">
+          <p>
+            I'm currently available for full-time positions. Feel free to reach
+            out if you want to work with me or just say hi!
+          </p>
+          <a
+            href="mailto:adityakumar5660@gmail.com"
+            class="btn"
+            >Send an Email</a
+          >
+          <div class="social-links">
+            <a href="https://github.com/adityaKumar101"
+              ><i class="fab fa-github"></i
+            ></a>
+            <a href="https://www.linkedin.com/in/aditya-kumar-a9a91616a"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <!-- <a href="#"><i class="fab fa-twitter"></i></a> -->
+            <!-- <a href="#"><i class="fab fa-gitlab"></i></a> -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <p>&copy; 2023 Aditya Kumar Rai. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // ... (existing JS remains the same) ...
+      //       gsap.registerPlugin(ScrollTrigger);
+      //
+      //       // Header scroll effect
+      //       window.addEventListener("scroll", () => {
+      //         const header = document.querySelector("header");
+      //         if (window.scrollY > 50) {
+      //           header.classList.add("scrolled");
+      //         } else {
+      //           header.classList.remove("scrolled");
+      //         }
+      //       });
+      //
+      //       // Hero section animation
+      //       gsap.from(".hero h1", {
+      //         duration: 1,
+      //         opacity: 0,
+      //         y: 50,
+      //         ease: "power3.out",
+      //         delay: 0.3,
+      //       });
+      //
+      //       gsap.from(".hero p", {
+      //         duration: 1,
+      //         opacity: 0,
+      //         y: 30,
+      //         ease: "power3.out",
+      //         delay: 0.6,
+      //       });
+      //
+      //       gsap.from(".hero-btns .btn", {
+      //         duration: 1,
+      //         opacity: 0,
+      //         y: 30,
+      //         stagger: 0.2,
+      //         ease: "power3.out",
+      //         delay: 0.9,
+      //       });
+
+      // Animate elements on scroll
+      //       const hiddenElements = document.querySelectorAll(".hidden");
+      //
+      //       hiddenElements.forEach((el) => {
+      //         gsap.fromTo(
+      //           el,
+      //           { opacity: 0, y: 30 },
+      //           {
+      //             opacity: 1,
+      //             y: 0,
+      //             duration: 1,
+      //             ease: "power3.out",
+      //             scrollTrigger: {
+      //               trigger: el,
+      //               start: "top 85%",
+      //               toggleActions: "play none none none",
+      //             },
+      //           }
+      //         );
+      //       });
+      //
+      //       // Background animation for hero section
+      //
+      //       // FIXED: Background animation for hero section
+      //       const heroSection = document.querySelector(".hero");
+      //       window.addEventListener("mousemove", (e) => {
+      //         const x = (e.clientX / window.innerWidth) * 100;
+      //         const y = (e.clientY / window.innerHeight) * 100;
+      //
+      //         gsap.to(heroSection, {
+      //           "--mouse-x": `${x}%`,
+      //           "--mouse-y": `${y}%`,
+      //           duration: 1,
+      //           ease: "power1.out",
+      //         });
+      //       });
+
+      // ... (rest of the JS remains the same) ...
+    </script>
+  </body>
+</html>
